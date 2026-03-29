@@ -1,0 +1,37 @@
+<div class="modal-backdrop" (click)="close()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="close()">×</button>
+    
+    <h2>{{ isLoginMode ? 'Login' : 'Create Account' }}</h2>
+    
+    <form class="signup-form">
+      <div class="input-group" *ngIf="!isLoginMode">
+        <label>Username</label>
+        <input type="text" [(ngModel)]="user.username" name="username" placeholder="Enter username">
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="user.email" name="email" placeholder="Enter email">
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="user.password" name="password" placeholder="Create password">
+      </div>
+
+      <div class="input-group" *ngIf="!isLoginMode">
+        <label>Confirm Password</label>
+        <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Repeat password">
+      </div>
+
+      <button type="button" class="signup-submit" (click)="onSubmit()">
+        {{ isLoginMode ? 'Login' : 'Sign Up' }}
+      </button>
+
+      <p (click)="isLoginMode = !isLoginMode" style="cursor: pointer; text-align: center;">
+        {{ isLoginMode ? 'Need an account? Sign Up' : 'Already have an account? Login' }}
+      </p>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,211 @@
+.bet-slip-container {
+  position: fixed;
+  right: 5px;
+  top: 78px;
+  
+  height: calc(100vh - 78px - 10px);
+
+  width: 400px;
+  background: #f7f8fa; /* soft gray like FanDuel */
+
+  border-radius: 12px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.20),
+    0 10px 20px rgba(0, 0, 0, 0.20);
+
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bet-slip-header {
+  background: white;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 700;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  position: sticky;
+  top: 0;
+}
+
+.bet-count {
+  background-color: rgb(0, 95, 200);
+  color: white;
+  padding: 3px 9px;
+  border-radius: 50%;
+}
+
+.bet-slip-card {
+  background: white;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+  transition: transform 0.15s ease;
+}
+
+.bet-slip-card:hover {
+  transform: translateY(-2px);
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-info {
+  display: flex;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.price {
+  font-weight: 700;
+  color: #1781ea;
+  font-size: 18px;
+}
+
+.bet-type {
+  font-size: 13px;
+  color: rgb(77, 81, 83);;
+  margin-top: 4px;
+}
+
+.game-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-top: 10px;
+  color: #4b5563;
+}
+
+.bet-inputs {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  border: 1.5px solid #d1d5db;
+}
+
+.input-box label {
+  margin-top:5px;
+  margin-left: 5px;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.input-box input {
+  border: none;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.input-box input:focus {
+  border: 1px solid #1781ea;
+  box-shadow: 0 0 0 2px rgba(23, 129, 234, 0.2);
+}
+
+.money-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0 8px;
+  background: white;
+  border: none;
+}
+
+.money-input span {
+  font-weight: 600;
+  color: #374151;
+  margin-right: 4px;
+}
+
+.money-input input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 8px 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bet-slip-footer {
+  margin-top: auto;
+  padding: 12px;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.place-bet-btn {
+  width: 75%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+
+  background: rgb(0, 95, 200);;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.place-bet-btn:hover {
+  background: #0f6edc;
+}
+
+.delete-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+  border: 1px solid #dc2626; /* red circle */
+  color: #dc2626;
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-icon:hover {
+  background: #dc2626;
+  color: white;
+}

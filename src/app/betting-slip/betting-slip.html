@@ -1,0 +1,76 @@
+<div class="bet-slip-container">
+
+  <div class="bet-slip-header">
+    <span class="bet-count">{{ bets.length }}</span>
+    {{ bets.length === 1 ? 'Betslip' : 'Betslips' }}
+  </div>
+
+  <div class="bet-slip-card" *ngFor="let bet of bets; let i = index">
+
+    <!-- TOP ROW -->
+    <div class="top-row">
+      <div class="team-info">
+        <span class="delete-icon" (click)="removeBet(i)">−</span>
+        <strong style="font-size: 18px;">{{ bet.team }}</strong>
+
+        <span *ngIf="bet.type === 'spread'" style="font-size: 18px;">
+          {{ bet.spread }}
+        </span>
+      </div>
+
+      <div class="price">
+        {{ bet.price }}
+      </div>
+    </div>
+
+    <!-- TYPE -->
+    <div class="bet-type">
+      {{ bet.type === 'spread' ? 'SPREAD BETTING' : 'MONEYLINE' }}
+    </div>
+
+    <!-- GAME INFO -->
+    <div class="game-row">
+      <span>
+        {{ bet.game.awayTeam }} @ {{ bet.game.homeTeam }}
+      </span>
+
+      <span>
+        {{ bet.game.commence_time | date: 'MMMM d h:mm' }}
+      </span>
+    </div>
+
+    <!-- INPUTS -->
+    <div class="bet-inputs">
+
+      <div class="input-box">
+        <label>Wager</label>
+        <div class="money-input">
+          <span>$</span>
+          <input 
+            type="number" 
+            [(ngModel)]="wagers[i]" 
+            placeholder="0.00"
+            id="money-input"
+          />
+        </div>
+      </div>
+
+      <div class="input-box">
+        <label>To Win</label>
+        <div class="money-input">
+          <span>$</span>
+          <input
+            type="number" 
+            [value]="calculateToWin(bet, wagers[i])"
+            readonly
+          />
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bet-slip-footer">
+    <button class="place-bet-btn" (click)="placeBet(i)">Place Bet</button>
+  </div>
+
+</div>

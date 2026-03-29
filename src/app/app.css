@@ -1,0 +1,300 @@
+.sports-toolbar {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background: linear-gradient(125deg, rgb(169, 211, 255) 0%, rgb(202, 222, 244) 100%);
+  justify-content: center;   /* Centers the buttons */
+  max-width: 678px;
+  margin: 3px auto;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.20),
+    0 10px 20px rgba(0, 0, 0, 0.20);
+}
+
+.league-btn {
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 30px;
+  background-color: white;
+  margin-right: 20px;
+}
+
+.league-btn:hover {
+  background-color: #dfedfc; /* Highlight color */
+}
+
+.selected-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(0, 95, 200);
+  border-radius: 30px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 20px;
+}
+
+.selected-btn:hover {
+  background-color: #007bff; /* Highlight color */
+}
+
+.game-card-container {
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.20),
+    0 10px 20px rgba(0, 0, 0, 0.20);
+  margin: 20px auto;
+  max-width: 700px;
+}
+
+.game-card {
+  background: #f3f3f6;
+  color: white;
+  display: grid;
+  grid-template-columns: 160px auto auto; 
+  grid-template-rows: auto auto;
+  column-gap: 20px;
+  row-gap: 8px;
+  max-width: 600px;
+  margin: 20px auto 14px auto;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.12),
+    0 10px 12px rgba(0, 0, 0, 0.20);
+}
+
+/* HEADER */
+.card-header {
+  display: contents;
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+/* Time under teams */
+.time {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 12px;
+  color: #1781ea;
+}
+
+/* Book spans both betting columns */
+.book {
+  grid-column: 2 / 4; /* spans spread + moneyline */
+  grid-row: 2;
+  text-align: center;
+  font-size: 12px;
+  color: #1781ea;
+}
+
+/* BODY */
+.card-body {
+  display: contents;
+  justify-content: flex-start; /* instead of space-between */
+  gap: 20px; /* controls spacing manually */
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* TEAMS */
+.teams {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.team {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.away {
+  color: #ddd;
+}
+
+.home {
+  color: #fff;
+}
+
+.at-row {
+  display: flex;
+  align-items: center;
+  margin: 18px 0;
+}
+
+.at-row span {
+  margin-right: 6px;
+  font-size: 12px;
+  color: #888;
+}
+
+.at-row .line {
+  flex: 1;
+  height: 1px;
+  background: #444;
+}
+
+/* BETTING GRID */
+.bets {
+  display: contents; /* 🔥 key trick */
+}
+
+.bet-column:nth-child(1) {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.bet-column:nth-child(2) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.bet-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* BUTTONS (FanDuel style) */
+.bet-btn {
+  background: #f3f3f6;
+  border: 1.5px solid #1781ea;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #1781ea;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 80px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.bet-btn span {
+  display: block;
+  font-size: 12px;
+  color: #1781ea;
+}
+
+.bet-btn:hover {
+  background: #c5c5cd;
+  border: 4px solid #1781ea;
+}
+
+.bet-btn:active {
+  transform: scale(0.97);
+}
+
+.column-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 12px;
+  margin-bottom: 6px;
+  color: #aaa;
+}
+
+.column-box {
+  max-width: 600px;
+  margin: 0 auto 6px auto;
+}
+
+.column-box .teams {
+  flex: 0 0 160px;
+}
+
+.column-box .bets {
+  display: flex;
+  gap: 10px;
+}
+
+/* League title styling */
+.league-column-header {
+  font-size: 24px;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+}
+
+.column-header {
+  font-size: 24px;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  margin-right: 45px;
+}
+
+.top-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 276px;
+  padding-right: 260px;
+  min-height: 66px;
+  background-color: rgba(0, 0, 0, 0);
+  background-position-x: 0%;
+  background-position-y: 0%;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-image: linear-gradient(125deg, rgb(1, 115, 244) 0%, rgb(1, 86, 182) 100%);
+  background-size: auto;
+  background-origin: padding-box;
+  background-clip: border-box;
+  margin: 0px auto;
+  border-radius: 6px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.20),
+    0 10px 20px rgba(0, 0, 0, 0.20);
+}
+
+.top-toolbar-label-container {
+  display: flex;
+  align-items: center;
+  margin-left: 210px;
+}
+
+.top-toolbar-label, .app-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-right: 35px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.top-toolbar-login-signup-container {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.login-btn, .signup-btn, .logout-btn {
+  background-color: transparent;
+  background-color: rgb(1, 115, 244);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border-color: rgb(1, 115, 244);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  box-sizing: border-box;
+  cursor: pointer;
+  min-width: 95px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.login-btn:hover, .signup-btn:hover, .logout-btn:hover {
+  background-color: white;
+  color: rgb(1, 115, 244);
+  border-color: rgb(1, 115, 244);
+}
+
+.user-balance {
+  font-size: 16px;
+  color: white;
+}
+
