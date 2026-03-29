@@ -8,6 +8,8 @@ import { SignupComponent } from './signup/signup';
 import { BettingSlipComponent, Bet } from './betting-slip/betting-slip';
 import { UserService } from './user-service';
 import { Observable } from 'rxjs';
+import { UserBet } from './user-bet-model';
+import { filter, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +30,7 @@ export class App implements OnInit {
 
   games = signal<Game[]>([]);
   bets: Bet[] = [];
+  userBets: UserBet[] = [];
 
   leagues: string[] = ['NBA', 'NCAAB', 'NHL', 'MLB', 'NFL', 'NCAAF'];
   selectedLeague: string = '';
@@ -94,8 +97,19 @@ export class App implements OnInit {
     }
   }
 
-  getMyBets() {
-    
+  getUserBets() {
+    this.userService.currentUser$.pipe(
+      filter(user => !!user), // Wait until user is not null
+      switchMap(user => this.gameService.getUserBets(`http://localhost:8080/bets?userId=${user.id}`))
+    ).subscribe(data => {
+      this.userBets = data;
+    });
+    // console.log("called");
+    // const apiUrl = 'http://localhost:8080/bets?userId=' + this.userService.currentUserValue().id;
+    // this.gameService.getUserBets(apiUrl).subscribe(data => {
+    //   this.userBets = data;
+    //   console.log('Fetched user bets:', this.userBets);
+    // });
   }
 
 }

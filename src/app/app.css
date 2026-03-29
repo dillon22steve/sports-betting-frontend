@@ -271,6 +271,11 @@
   border-radius: 4px;
 }
 
+.top-toolbar-label:hover {
+  color: #ddd;
+  cursor: pointer;
+}
+
 .login-btn, .signup-btn, .logout-btn {
   background-color: transparent;
   background-color: rgb(1, 115, 244);

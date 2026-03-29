@@ -11,6 +11,17 @@ export class UserService {
   currentUser$ = this.userSource.asObservable();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      const savedUser = localStorage.getItem('currentUser');
+      if (savedUser) {
+        try {
+          // Parse the string and push it into the stream
+          this.userSource.next(JSON.parse(savedUser));
+        } catch (e) {
+          console.error("Could not parse user from localStorage", e);
+        }
+      }
+    }
   }
 
   // 4. Update balance and save to storage safely

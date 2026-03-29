@@ -35,4 +35,10 @@ export class GameService {
     }
 
   }
+
+
+  getUserBets(apiUrl: string): Observable<any> {
+    console.log('Fetching user bets from API:', apiUrl);
+    return this.http.get<any>(apiUrl);
+  }
 }

@@ -14,7 +14,7 @@
       <div class="top-toolbar-label-container">
         <label class="app-title">Sports Book <span style="display: block; padding-left: 22px;">Betting</span></label>
         <label class="top-toolbar-label">Home</label>
-        <label class="top-toolbar-label" (click)="getMyBets()">My Bets</label>
+        <label class="top-toolbar-label" (click)="getUserBets()">My Bets</label>
       </div>
       <div class="top-toolbar-login-signup-container" *ngIf="!(currentUser$ | async); else loggedInLinks">
         <button class="login-btn" (click)="openModal(true)">Login</button>

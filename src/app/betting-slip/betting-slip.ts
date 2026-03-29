@@ -61,6 +61,7 @@ export class BettingSlipComponent {
     const betData = {
       userId: this.currentUser.source.value.id,
       gameId: this.bets[selectedBet].game.id,
+      teamBeOn: this.bets[selectedBet].team,
       amountBet: input.value,
       isSpreadBet: this.bets[selectedBet].type === 'spread'
     }
