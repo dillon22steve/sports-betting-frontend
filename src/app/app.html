@@ -1,11 +1,3 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <main class="main">
   <div class="content">
@@ -13,7 +5,7 @@
     <nav class="top-toolbar">
       <div class="top-toolbar-label-container">
         <label class="app-title">Sports Book <span style="display: block; padding-left: 22px;">Betting</span></label>
-        <label class="top-toolbar-label">Home</label>
+        
         <label class="top-toolbar-label" (click)="getUserBets()">My Bets</label>
       </div>
       <div class="top-toolbar-login-signup-container" *ngIf="!(currentUser$ | async); else loggedInLinks">
@@ -28,6 +20,14 @@
         <span class="user-balance">Balance: ${{ user.balance | number:'1.2-2' }}</span>
       </div>
     </ng-template>
+
+    <div class="popup-overlay" *ngIf="isUserBetsModalOpen" (click)="closeBets()">
+      <div class="popup-content" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closeBets()">×</button>
+        
+        <app-user-bets [userBets]="userBets"></app-user-bets>
+      </div>
+    </div>
 
     <ng-container *ngIf="isModalOpen">
       <app-signup 
@@ -141,8 +141,7 @@
           </div>
         </div>
       </div>
-      <app-bet-slip 
-        *ngIf="displayCards"
+      <app-bet-slip
         [bets]="bets"
         [currentUser]="currentUser$"
         (userUpdate)="currentUser$ = $event">

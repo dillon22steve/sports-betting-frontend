@@ -5,7 +5,8 @@
     {{ bets.length === 1 ? 'Betslip' : 'Betslips' }}
   </div>
 
-  <div class="bet-slip-card" *ngFor="let bet of bets; let i = index">
+  <div class="bet-slip-body">
+    <div class="bet-slip-card" *ngFor="let bet of bets; let i = index">
 
     <!-- TOP ROW -->
     <div class="top-row">
@@ -47,6 +48,7 @@
         <div class="money-input">
           <span>$</span>
           <input 
+            #moneyInput
             type="number" 
             [(ngModel)]="wagers[i]" 
             placeholder="0.00"
@@ -60,9 +62,11 @@
         <div class="money-input">
           <span>$</span>
           <input
+            #toWin
             type="number" 
             [value]="calculateToWin(bet, wagers[i])"
             readonly
+            id="toWin"
           />
       </div>
 

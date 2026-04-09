@@ -22,6 +22,8 @@ export class BettingSlipComponent {
   constructor(private http: HttpClient, private userService: UserService) {}
 
   wagers: number[] = [];
+  moneyInput: number = 0;
+  toWin: number = 0;
 
   close() {
     this.isBetSlipOpen = false;
@@ -46,6 +48,7 @@ export class BettingSlipComponent {
 
   removeBet(index: number) {
     this.bets.splice(index, 1);
+    this.wagers.splice(index, 1);
     // Auto-close if the last bet is removed
     if (this.bets.length === 0) {
       this.closeBetSlip.emit();
@@ -58,13 +61,17 @@ export class BettingSlipComponent {
 
     const apiEndpoint = 'http://localhost:8080/bets/place';
     const input = document.getElementById("money-input") as HTMLInputElement;
+    const toWin = document.getElementById("toWin") as HTMLInputElement;
     const betData = {
       userId: this.currentUser.source.value.id,
       gameId: this.bets[selectedBet].game.id,
-      teamBeOn: this.bets[selectedBet].team,
+      teamBetOn: this.bets[selectedBet].team,
       amountBet: input.value,
+      amountToWin: this.calculateToWin(this.bets[selectedBet], Number(input.value)),
       isSpreadBet: this.bets[selectedBet].type === 'spread'
     }
+
+    console.log(betData.isSpreadBet);
 
     this.http.post(apiEndpoint, betData).subscribe({
       next: (response) => {
@@ -72,6 +79,7 @@ export class BettingSlipComponent {
         alert('Bet placed successfully!');
         this.bets.splice(selectedBet, 1);
         this.userService.updateBalance(Number(input.value));
+        this.wagers.splice(selectedBet, 1);
         this.closeBetSlip.emit();
       },
       error: (error) => {

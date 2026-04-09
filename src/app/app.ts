@@ -10,11 +10,13 @@ import { UserService } from './user-service';
 import { Observable } from 'rxjs';
 import { UserBet } from './user-bet-model';
 import { filter, switchMap } from 'rxjs/operators';
+import { UserBetsComponent, ExistingUserBet } from './user-bets/user-bets';
+import { UserBetService } from './user-bets-service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, SignupComponent, BettingSlipComponent],
+  imports: [RouterOutlet, CommonModule, SignupComponent, BettingSlipComponent, UserBetsComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -24,13 +26,14 @@ export class App implements OnInit {
   constructor(
     private gameService: GameService,  
     private cdr: ChangeDetectorRef,
-    private userService: UserService) {
+    private userService: UserService,
+    private userBetsService: UserBetService) {
       this.currentUser$ = this.userService.currentUser$;
     }
 
   games = signal<Game[]>([]);
   bets: Bet[] = [];
-  userBets: UserBet[] = [];
+  userBets: ExistingUserBet[] = [];
 
   leagues: string[] = ['NBA', 'NCAAB', 'NHL', 'MLB', 'NFL', 'NCAAF'];
   selectedLeague: string = '';
@@ -97,19 +100,28 @@ export class App implements OnInit {
     }
   }
 
+
+
+  isUserBetsModalOpen = false;
   getUserBets() {
-    this.userService.currentUser$.pipe(
-      filter(user => !!user), // Wait until user is not null
-      switchMap(user => this.gameService.getUserBets(`http://localhost:8080/bets?userId=${user.id}`))
-    ).subscribe(data => {
-      this.userBets = data;
-    });
-    // console.log("called");
-    // const apiUrl = 'http://localhost:8080/bets?userId=' + this.userService.currentUserValue().id;
-    // this.gameService.getUserBets(apiUrl).subscribe(data => {
-    //   this.userBets = data;
-    //   console.log('Fetched user bets:', this.userBets);
-    // });
+    console.log("Attempting to fetch user bets...");
+    const userId = this.userService.currentUserValue?.id;
+    if (userId) {
+      this.userBetsService.getBets(userId).subscribe(bets => {
+        this.userBets = bets;
+        this.isUserBetsModalOpen = true;
+        this.cdr.markForCheck();
+        console.log('Fetched user bets:', bets);
+      });
+      console.log("API call initiated for user bets with user ID:", userId);
+    } else {
+      console.warn("No user logged in, cannot fetch bets.");
+      console.log("Current user value:", this.userService.currentUserValue);
+    }
+  }
+
+  closeBets() {
+    this.isUserBetsModalOpen = false;
   }
 
 }

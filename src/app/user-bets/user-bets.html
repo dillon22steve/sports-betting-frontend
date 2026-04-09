@@ -1,1 +1,116 @@
-<p>user-bets works!</p>
+<div class="user-bets-container">
+
+  <!-- HEADER -->
+  <div class="bet-slip-header">
+    My Bets
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div 
+      class="tab" 
+      [class.active]="activeTab === 'open'"
+      (click)="activeTab = 'open'"
+    >
+      Open
+    </div>
+
+    <div 
+      class="tab" 
+      [class.active]="activeTab === 'settled'"
+      (click)="activeTab = 'settled'"
+    >
+      Settled
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="bets-scroll">
+
+    <div *ngIf="filteredBets.length === 0" class="no-bets">
+      No {{ activeTab === 'open' ? 'open' : 'settled' }} bets
+    </div>
+
+    <div
+      class="bet-slip-card"
+      *ngFor="let bet of filteredBets; let i = index;"
+      [ngClass]="{
+        'settled-success-card': bet.completed && bet.amountWonOrLost != null && bet.amountWonOrLost > 0,
+        'settled-loss-card': bet.completed && bet.amountWonOrLost != null && bet.amountWonOrLost <= 0
+      }"
+    >
+      <div
+        *ngIf="bet.completed && bet.amountWonOrLost != null && bet.amountWonOrLost > 0"
+        class="settled-badge"
+      >
+        ✓
+      </div>
+
+      <!-- TOP ROW -->
+      <div class="top-row">
+        <div class="team-info">
+          <strong style="font-size: 18px;">
+            {{ bet.teamBetOn }}
+          </strong>
+
+          <span *ngIf="bet.spread !== null" style="font-size: 18px;">
+            {{ bet.spread > 0 ? '+' + bet.spread : bet.spread }}
+          </span>
+        </div>
+
+        <div class="price">
+          {{ bet.point > 0 ? '+' + bet.point : bet.point }}
+        </div>
+      </div>
+
+      <!-- TYPE -->
+      <div class="bet-type">
+        {{ bet.spread !== null ? 'SPREAD BETTING' : 'MONEYLINE' }}
+      </div>
+
+      <!-- GAME INFO -->
+      <div class="game-row">
+        <span>
+          {{ bet.awayTeam }} @ {{ bet.homeTeam }}
+        </span>
+
+        <span>
+          {{ bet.commenceTime | date: 'MMMM d h:mm' }}
+        </span>
+      </div>
+
+      <!-- WAGER / RESULT -->
+      <div class="bet-result-row">
+
+        <div class="result-box">
+          <label>Wager</label>
+          <div class="money-display">
+            ${{ bet.amountBet }}
+          </div>
+        </div>
+
+        <div class="result-box">
+          <label>{{ activeTab === 'open' ? 'To Win' : 'Payout' }}</label>
+          <div 
+            class="money-display"
+            [ngClass]="{
+              'settled-profit': bet.completed && bet.amountWonOrLost != null && bet.amountWonOrLost > 0,
+              'settled-loss': bet.completed && bet.amountWonOrLost != null && bet.amountWonOrLost <= 0
+            }"
+          >
+            {{ bet.completed ? ('$' + bet.amountWonOrLost) : ('$' + calculatePotentialWin(bet)) }}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="bet-actions" *ngIf="!bet.completed">
+            <button class="delete-btn" (click)="removeBet(i)">
+                🗑 Remove Bet
+            </button>
+        </div>
+
+    </div>
+
+  </div>
+</div>

@@ -48,6 +48,28 @@ export class UserService {
     }
   }
 
+  refundBalance(amountToRefund: number) {
+    const currentUser = this.userSource.value;
+    if (currentUser) {
+      // Create a copy to maintain immutability
+      const updatedUser = { 
+        ...currentUser, 
+        balance: currentUser.balance + amountToRefund 
+      };
+
+      console.log('Updated user object:', updatedUser);
+      
+      // Update the stream
+      this.userSource.next(updatedUser);
+      
+      // Save to localStorage only in the browser
+      if (isPlatformBrowser(this.platformId)) {
+        console.log('Saving updated user to localStorage:', updatedUser);
+        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+      }
+    }
+  }
+
   // 5. Added: A way to set the user (e.g., after login)
   setCurrentUser(user: any) {
     this.userSource.next(user);

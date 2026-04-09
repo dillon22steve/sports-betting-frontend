@@ -38,6 +38,15 @@
   border-radius: 50%;
 }
 
+.bet-slip-body {
+  flex: 1;            /* Takes up all remaining space between header and footer */
+  overflow-y: auto;   /* Shows scrollbar only when content overflows */
+  padding: 12px;      /* Move padding here so cards aren't touching the edges */
+  
+  /* Optional: Smooth scrolling */
+  scroll-behavior: smooth;
+}
+
 .bet-slip-card {
   background: white;
   border-radius: 12px;
@@ -164,6 +173,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  z-index: 10;
 }
 
 .place-bet-btn {
