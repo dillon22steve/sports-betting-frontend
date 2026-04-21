@@ -46,7 +46,7 @@ export class UserBetsComponent implements OnInit, OnChanges {
       : this.userBets.filter(b => b.completed);
 
     return [...bets].sort((a, b) => 
-      new Date(a.commenceTime).getTime() - new Date(b.commenceTime).getTime()
+      new Date(b.commenceTime).getTime() - new Date(a.commenceTime).getTime()
     );
   }
 
